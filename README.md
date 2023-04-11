@@ -1,11 +1,15 @@
 # SingleTon_Class_Thread_Safe
 
 /**
+
  * Write a java program to create a singleton class.
  *
  * @author Firoj
+ 
  * @since 2022-01-05
+ 
  */
+ 
  Singleton a class is a class that can have only one instance or object of your class at one time.
  Singleton patterns are used ensure that the class will have only one instance and it provides a global access point to that instruction.
 Let me show you how to implement this Verity of code.
@@ -22,6 +26,7 @@ private static SingletonClass instance;
 I am going to make constructor as a private show that the object
 this class cannot be created outside this class.
 private SingletosnClass() {
+
 }
 
 Create a method and that method should return instance of this class(instance).
@@ -44,8 +49,10 @@ this approach called as double check login pattern.
 // We require lock on the  object or class level. We have a class level lock
 synchronized (SingletonClass.class) {
 
-if (instance == null) { //No other thread will access this thread
+//No other thread will access this thread
+if (instance == null) {
 instance = new SingletonClass();
+
  }
 
       }
@@ -76,7 +83,11 @@ Not created because constructor as a private not access the outside class.
       }
       
       else {
+      
             System.out.println("Both Object are different");
+            
           }
+          
       }
+      
 }
