@@ -135,9 +135,10 @@ Not created because constructor as a private not access the outside class.
 
 
 
+
 Singleton a class is a class that can have only one instance or object of your class at one time.
 
- Singleton patterns are used ensure that the class will have only one instance and it provides a global access point to that instruction.
+Singleton patterns are used ensure that the class will have only one instance and it provides a global access point to that instruction.
  
 Let me show you how to implement this Verity of code.
 
