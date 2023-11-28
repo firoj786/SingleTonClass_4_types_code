@@ -112,8 +112,9 @@ the synchronized block and once after. This can prevent unnecessary synchronizat
     If it is still null, then the getInstance() method creates a new instance of the SingletonDoubleCheckedLocking class and stores it in the instance variable.
 
 6. The getInstance() method then returns the instance variable.
+   
 
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Singleton Eager Instantiation &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&& Singleton Eager Instantiation &&&&&&&&&&&&&&&&&&&&&
 
 4. SingletonEagerInstantiation. A singleton class is a class that can only have one instance.
    The SingletonEagerInstantiation class uses eager instantiation to create an instance of the class when the class is loaded.
