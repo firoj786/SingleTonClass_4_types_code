@@ -10,87 +10,127 @@
  
  */
  
+
 Singleton a class is a class that can have only one instance or object of your class at one time.
- 
+
 Singleton patterns are used ensure that the class will have only one instance and it provides a global access point to that instruction.
  
 Let me show you how to implement this Verity of code.
 
-This is a singleton class i am going to make as singleton class.
+Singleton Steps
 
-Make this singleton class i need to ensure that there will be a variable which will be a type of singleton class.
+a.	Declare the constructor of the class as private.
 
-There will be a constructor which will be a private constructor.
+b.	Declare a static method.
 
-i don't want this class to be access from outside of this class.
+c.	Declare a static member of the same class type in the class.
 
-i am create object by using constructor that's reason.
-
-i am going to make class as a private.
-
-class SingletonClass {
-
-I make the as private because should not be access outside this class.
-
-private static SingletonClass instance;
-
-I am going to make constructor as a private show that the object
-
-this class cannot be created outside this class.
-
-private SingletosnClass() {
-
+1. Normal singletone class 
+public class SingletonNormal {
+    private static SingletonNormal uniqueInstance;
+    private SingletonNormal() {}
+    public static SingletonNormal getInstance() {
+        if(uniqueInstance == null) {
+            uniqueInstance = new SingletonNormal();
+        }
+        return uniqueInstance;
+    }
 }
 
-Create a method and that method should return instance of this class(instance).
-
- public static SingletonClass getInstance() {
- 
- This method check instance already exists or not if does not exist.
- 
- then I will return i will create a new instance i will return in the instance.
- 
- already exists then i will return the instance which will already create. Instance is not created.
- 
-if (instance == null) {
-
-I need to create instance then send the return it back to this. here i going to check, 
-
-i am going to ensure that in Multithreading environment.
-
-there will be only one thread who will create or can create the instance at a time.
-
-I am going to write synchronized this synchronized.
-
-will have singleton class and this block will check again if the instance
-
-is created or not. if the instance is created then return the instance.
-
-If the instance is not created, then again it is going to create the instance sanded to back.
-
-this approach called as double check login pattern.
-
-// We require lock on the  object or class level. We have a class level lock
-
-synchronized (SingletonClass.class) {
-
-//No other thread will access this thread
-
-if (instance == null) {
-
-instance = new SingletonClass();
-
- }
-
-     }
-      
-        }
-        
-      return instance;
-
-      }
-      
++++++++++++++++++++++++++++++++++++++++++++Thread Safe Singleton class +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2.  singleton class is a class that can only have one instance.
+    The SingletonSynchronized class uses the synchronized keyword to ensure that
+     only one thread can create an instance of the class at a time.
+    
+public class SingletonSynchronized {
+    private static SingletonSynchronized instance;
+    private SingletonSynchronized() {};
+    public static synchronized SingletonSynchronized getInstance() {
+        if(instance == null) {
+            instance = new SingletonSynchronized();
+        }
+        return instance;
+    }
 }
+
+1. The instance variable is a static variable that is used to store the instance of the SingletonSynchronized class.
+
+2. The constructor of the SingletonSynchronized class is private. This means that the class cannot be instantiated from outside of the class.
+
+3. The getInstance() method is a static method that returns the instance of the SingletonSynchronized class. 
+   The getInstance() method is synchronized, which means that only one thread can execute the method at a time.
+
+4. The getInstance() method checks to see if the uniqueInstance variable is null.
+   If it is null, then the getInstance() method creates a new instance of the SingletonSynchronized class and stores it in the instance variable.
+
+5. The getInstance() method then returns the instance variable.
+
+  ===================================Double Checking Lock======================================================
+3. A singleton class is a class that can only have one instance. 
+The SingletonDoubleCheckedLocking class uses double-checked locking to ensure that 
+only one thread can create an instance of the class at a time.
+
+Double-checked locking is an optimization technique that can improve the performance of singleton classes.
+The technique works by checking to see if the instance of the class is null twice, once before entering 
+the synchronized block and once after. This can prevent unnecessary synchronization, which can improve the performance of the class.
+
+   public class SingletonDoubleCheckedLocking {
+    private static SingletonDoubleCheckedLocking instance;
+    private SingletonDoubleCheckedLocking() {}
+    public static SingletonDoubleCheckedLocking getInstance() {
+        if(instance == null) {
+            synchronized (SingletonDoubleCheckedLocking.class) {
+                if(instance == null) {
+                    instance = new SingletonDoubleCheckedLocking();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
+
+1.The instance variable is a static variable that is used to store the instance of the SingletonDoubleCheckedLocking class.
+
+2. The constructor of the SingletonDoubleCheckedLocking class is private. This means that the class cannot be instantiated from outside of the class.
+
+3. The getInstance() method is a static method that returns the instance of the SingletonDoubleCheckedLocking class.
+   The getInstance() method checks to see if the instance variable is null. If it is null, then the getInstance() method enters a synchronized block.
+
+5. Inside the synchronized block, the getInstance() method checks again to see if the instance variable is null.
+    If it is still null, then the getInstance() method creates a new instance of the SingletonDoubleCheckedLocking class and stores it in the instance variable.
+
+6. The getInstance() method then returns the instance variable.
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Singleton Eager Instantiation &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+4. SingletonEagerInstantiation. A singleton class is a class that can only have one instance.
+   The SingletonEagerInstantiation class uses eager instantiation to create an instance of the class when the class is loaded.
+
+Eager instantiation is a simple way to ensure that there is only one instance of a class. 
+However, it also means that the instance of the class will be created even if it is not needed. 
+This can be a waste of resources, especially if the class is expensive to create.
+
+public class SingletonEagerInstantiation {
+    private static SingletonEagerInstantiation uniqueInstance = new SingletonEagerInstantiation();
+    private SingletonEagerInstantiation() {}
+    public static SingletonEagerInstantiation getInstance() {
+        return uniqueInstance;
+    }
+}
+
+1. The uniqueInstance variable is a static variable that is used to store the instance of the SingletonEagerInstantiation class.
+
+2. The constructor of the SingletonEagerInstantiation class is private
+   This means that the class cannot be instantiated from outside of the class.
+
+3. The instance of the SingletonEagerInstantiation class is created when the class is loaded.
+   This is because the uniqueInstance variable is initialized with a new instance of the class.
+
+4. The getInstance() method is a static method that returns the instance of the SingletonEagerInstantiation class.
+   The getInstance() method simply returns the uniqueInstance variable.
+
+
+
 
 public class TestSingleTonClass {
 
@@ -101,7 +141,6 @@ public class TestSingleTonClass {
  then this is singleton class and singleton instance.
  
  SingletonClass singleton1 = SingletonClass.getInstance();
- 
  
  SingletonClass singleton2 = SingletonClass.getInstance();
 
@@ -128,207 +167,3 @@ Not created because constructor as a private not access the outside class.
 }
 
 
-
-
-
-
-
-
-
-
-Singleton a class is a class that can have only one instance or object of your class at one time.
-
-Singleton patterns are used ensure that the class will have only one instance and it provides a global access point to that instruction.
- 
-Let me show you how to implement this Verity of code.
-
-Singleton Steps
-
-a.	Declare the constructor of the class as private.
-
-b.	Declare a static method.
-
-c.	Declare a static member of the same class type in the class.
-
-class Singleton{
-
-//Declare a static member of the same class type in the class.
-
-private static Singleton instance;
-
-//Declare the constructor pf the class as private.
-
-private Singleton(){
-
-}
-
-//Declare a static method.
-
-public static Singleton getInstance(){
-
-if(instance==null){
-
-instance=new Singleton();// We don’t want to return this instance every time this getInstance is called 
-
-}// We don’t want to return create a new instance will do that only check this if(instance==null).
-
-return instance;
-
-       }
-       
-}
-
-public class Test{
-
-public static void main(String args[]){
-
-Singleton s1=Singleton.getInstance();
-
-Singleton s2=Singleton.getInstance();
-
-Sop(s1==s2);
-
-   }
-   
-}// Output is : True
-
-For Example: If have two thread which are trying to create an instance of Singleton class.
-
-public static Singleton getInstance(){
-
-//The first thread enter this if(instance==null) it will do this check and about to create an instance.
-
-instance=new Singleton(); in the meantime another thread come and does this check.
-
-if(instance==null) even before the first thread create in this instance instance=new Singleton();  thread. 
-
-This expression here if(instance==null) evaluate to true. 
-
-It will go on and meantime the first thread would out create instance instance=new Singleton();
-
-and second thread also create an instance having two instance Void this problem.
-
-public static Singleton getInstance(){
-
-        if(instance==null){
-
-       instance=new Singleton();
-
-   }
-       return instance;
-       
-    }
-
-}
-
-Java Mark this method as Synchronized.
-
-public static synchronized Singleton getInstance(){
-
-if(instance==null){
-
-instance=new Singleton();
-
-}
-
-return instance;
-
-    }
-    
-}
-
-
-
-class Singleton{
-
-//Declare a static member of the same class type in the class.
-
-// To mark static variable as volatile. Do avoid any issues in a multithreaded environment.
-
-private static volatile Singleton instance;
-
-//Declare the constructor pf the class as private.
-
-private Singleton(){
-
-}
-Make sure that this method will be access only by one thread at a time.
-
-Make our code even better remove the keyword here mark this block if(instance==null) as synchronized.
-
-public static synchronized Singleton getInstance(){
-
-// Use synchronized with in the Bereket 
-
-//And require the lock within the object or class. We have a class level lock
-
-if(instance==null){
-
-synchronized(Singleton.class){ //the block is start here
-
-if(instance==null){ After this if block
-
-instance=new Singleton();
-
-   }
-         }//Will end here
-}
-
-return instance;
-
-    }
-    
-}
-
-
-Eger Initialization
-
-public class Singleton{
-
-//Declare a static member of the same class type in the class.
-
-private static Singleton instance=new Singleton();
-
-//Declare the constructor of the class as private.
-
-private Singleton(){
-}
-//Declare a static method.
-
-public static Singleton getInstance(){
-
-return instance;
-
-    }
-}
-
-Second Approach
-
-public class Singleton{
-
-//Declare a static member of the same class type in the class.
-
-private static Singleton instance;
-
-//Static blocks execute class is loaded in memory.
-
-static{
-
-instance=new Singleton();
-
-}
-
-//Declare the constructor pf the class as private.
-
-private Singleton(){
-
-}
-//Declare a static method.
-
-public static Singleton getInstance(){
-
-return instance;
-
-    }
-    
-}
