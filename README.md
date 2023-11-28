@@ -85,7 +85,11 @@ the synchronized block and once after. This can prevent unnecessary synchronizat
     private static SingletonDoubleCheckedLocking instance;
     private SingletonDoubleCheckedLocking() {}
     public static SingletonDoubleCheckedLocking getInstance() {
+    //If the instance variable is null. If it is, then the code enters the if block.
         if(instance == null) {
+        This line enters a synchronized block. This means that only one thread can execute 
+        the code inside the synchronized block at a time. The synchronized (SingletonDoubleCheckedLocking.class) 
+        statement locks the SingletonDoubleCheckedLocking class itself, preventing multiple threads from accessing the critical section simultaneously.
             synchronized (SingletonDoubleCheckedLocking.class) {
                 if(instance == null) {
                     instance = new SingletonDoubleCheckedLocking();
@@ -120,10 +124,10 @@ This can be a waste of resources, especially if the class is expensive to create
 
 public class SingletonEagerInstantiation {
 
-    private static SingletonEagerInstantiation uniqueInstance = new SingletonEagerInstantiation();
+    private static SingletonEagerInstantiation instance = new SingletonEagerInstantiation();
     private SingletonEagerInstantiation() {}
     public static SingletonEagerInstantiation getInstance() {
-        return uniqueInstance;
+        return instance;
     }
 }
 
@@ -136,7 +140,7 @@ public class SingletonEagerInstantiation {
    This is because the uniqueInstance variable is initialized with a new instance of the class.
 
 4. The getInstance() method is a static method that returns the instance of the SingletonEagerInstantiation class.
-   The getInstance() method simply returns the uniqueInstance variable.
+   The getInstance() method simply returns the instance variable.
 
 
 
