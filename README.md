@@ -25,8 +25,10 @@ b.	Declare a static method.
 
 c.	Declare a static member of the same class type in the class.
 
-1. Normal singletone class 
+1. Normal singletone class
+   
 public class SingletonNormal {
+
     private static SingletonNormal uniqueInstance;
     private SingletonNormal() {}
     public static SingletonNormal getInstance() {
@@ -37,12 +39,14 @@ public class SingletonNormal {
     }
 }
 
-+++++++++++++++++++++++++++++++++++++++++++Thread Safe Singleton class +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++ Thread Safe Singleton class +++++++++++++++++++++++++++++++++++++++++
+
 2.  singleton class is a class that can only have one instance.
     The SingletonSynchronized class uses the synchronized keyword to ensure that
      only one thread can create an instance of the class at a time.
     
 public class SingletonSynchronized {
+
     private static SingletonSynchronized instance;
     private SingletonSynchronized() {};
     public static synchronized SingletonSynchronized getInstance() {
@@ -51,6 +55,7 @@ public class SingletonSynchronized {
         }
         return instance;
     }
+    
 }
 
 1. The instance variable is a static variable that is used to store the instance of the SingletonSynchronized class.
@@ -66,6 +71,7 @@ public class SingletonSynchronized {
 5. The getInstance() method then returns the instance variable.
 
   ===================================Double Checking Lock======================================================
+  
 3. A singleton class is a class that can only have one instance. 
 The SingletonDoubleCheckedLocking class uses double-checked locking to ensure that 
 only one thread can create an instance of the class at a time.
@@ -75,6 +81,7 @@ The technique works by checking to see if the instance of the class is null twic
 the synchronized block and once after. This can prevent unnecessary synchronization, which can improve the performance of the class.
 
    public class SingletonDoubleCheckedLocking {
+   
     private static SingletonDoubleCheckedLocking instance;
     private SingletonDoubleCheckedLocking() {}
     public static SingletonDoubleCheckedLocking getInstance() {
@@ -102,7 +109,8 @@ the synchronized block and once after. This can prevent unnecessary synchronizat
 
 6. The getInstance() method then returns the instance variable.
 
-&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Singleton Eager Instantiation &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& Singleton Eager Instantiation &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 4. SingletonEagerInstantiation. A singleton class is a class that can only have one instance.
    The SingletonEagerInstantiation class uses eager instantiation to create an instance of the class when the class is loaded.
 
@@ -111,6 +119,7 @@ However, it also means that the instance of the class will be created even if it
 This can be a waste of resources, especially if the class is expensive to create.
 
 public class SingletonEagerInstantiation {
+
     private static SingletonEagerInstantiation uniqueInstance = new SingletonEagerInstantiation();
     private SingletonEagerInstantiation() {}
     public static SingletonEagerInstantiation getInstance() {
